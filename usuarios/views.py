@@ -88,19 +88,26 @@ def deleta_receita(request, receita_id):
 
 def edita_receita(request, receita_id):
     receita = get_object_or_404(Receita, pk=receita_id)
-    # if request.method == 'POST':
-    #     receita.nome_receita = request.POST['nome_receita']
-    #     receita.ingredientes = request.POST['ingredientes']
-    #     receita.modo_preparo = request.POST['modo_preparo']
-    #     receita.tempo_preparo = request.POST['tempo_preparo']
-    #     receita.rendimento = request.POST['rendimento']
-    #     receita.categoria = request.POST['categoria']
-    #     receita.foto_receita = request.FILES['foto_receita']
-    #     receita.user = get_object_or_404(User, pk=request.user.id)
-    #     receita.save()
-    #     return redirect('dashboard')
     receita_a_editar = {'receita' : receita}
     return render(request, 'usuarios/edita_receita.html', receita_a_editar)
+
+def atualiza_receita(request):
+    receita_id = request.POST['receita_id']
+    r = Receita.objects.get(pk=receita_id)
+    if request.method == 'POST':
+        r.nome_receita = request.POST['nome_receita']
+        r.ingredientes = request.POST['ingredientes']
+        r.modo_preparo = request.POST['modo_preparo']
+        r.tempo_preparo = request.POST['tempo_preparo']
+        r.rendimento = request.POST['rendimento']
+        r.categoria = request.POST['categoria']
+        if 'foto_receita' in request.FILES:
+            r.foto_receita = request.FILES['foto_receita']
+        r.user = get_object_or_404(User, pk=request.user.id)
+        r.save()
+        return redirect('dashboard')
+    else:
+        return redirect('edita_receita', receita_id=receita_id)
 
 def campo_vazio(campo):
     return not campo.strip()
