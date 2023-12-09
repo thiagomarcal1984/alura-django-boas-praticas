@@ -363,3 +363,8 @@ Mudanças no arquivo `galeria/index.html`:
   <!-- Resto do código -->
 ```
 > Repare que no início carregamos o aplicativo `static` com o comando `{% load static %}`, e que para carregarmos a folha de estilos salva em `STATIC_ROOT` usamos o comando `{% static 'nome_do_arquivo_estatico' %}`.
+
+# Carregando as imagens
+Nesta aula apenas configuramos as tags de imagem para carregar os arquivos estáticos com o comando `{% static 'nome_do_arquivo_estático' %}`.
+
+Destaque para o uso da tecla `Alt` do Windows para posicionar vários cursores no VS Code.
