@@ -205,3 +205,6 @@ SECRET_KEY = str(os.getenv('SECRET_KEY'))
 ```
 
 > Criei o arquivo `exemplo.env` para conter os parâmetros que serão carregados como variáveis de ambiente, uma vez que o arquivo `.env` é ignorado pelo `.gitignore`.
+
+# Git e GitHub
+Se você visitar o endereço http://gitignore.io, você pode usar o gerador de `.gitignore` deles. Basta escolher as linguagens que serão usadas no seu código e copiar o `.gitignore` criado.
