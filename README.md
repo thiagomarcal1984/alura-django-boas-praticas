@@ -181,3 +181,27 @@ LANGUAGE_CODE = 'pt-br'
 TIME_ZONE = 'America/Sao_Paulo'
 ```
 > A biblioteca para implementação da timezone do Django mudou de `pytz` para `zoneinfo`.
+
+# Variáveis de ambiente
+Vamos instalar o `python-dotenv` para usarmos variáveis de ambiente:
+```
+(venv) PS D:\alura\django-boas-praticas> pip install python-dotenv
+Collecting python-dotenv
+  Downloading python_dotenv-1.0.0-py3-none-any.whl (19 kB)
+Installing collected packages: python-dotenv
+Successfully installed python-dotenv-1.0.0
+```
+Depois, incluímos algumas configurações no arquivo `settings.py`:
+
+```python
+from pathlib import Path, os
+from dotenv import load_dotenv
+
+load_dotenv() # Esta função vai carregar o arquivo `.env` do projeto
+# Resto do código
+
+SECRET_KEY = str(os.getenv('SECRET_KEY')) 
+# Garanta que o conteúdo da SECRET_KEY será carregado como string.
+```
+
+> Criei o arquivo `exemplo.env` para conter os parâmetros que serão carregados como variáveis de ambiente, uma vez que o arquivo `.env` é ignorado pelo `.gitignore`.
