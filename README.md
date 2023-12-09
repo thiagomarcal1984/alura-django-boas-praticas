@@ -251,3 +251,31 @@ urlpatterns = [
 ]
 ```
 > Repare na lista `urlpatterns`: originalmente só tinha uma rota/path para o painel administrativo. Agora, a raiz da aplicação (representada pela string vazia) redireciona para a view `index`, que está no pacote `galeria.views`.
+
+# Isolando as URLs
+Para isolar as urls associadas a cada aplicativo, crie um arquivo `urls.py` para cada aplicativo e os referencie no arquivo `urls.py` do projeto principal por meio da função `include('nome_do_app.urls')`
+
+Criação do arquivo `galeria/urls.py`:
+```python
+from django.urls import path
+
+from galeria.views import index
+
+urlpatterns = [
+    path('', index),
+]
+```
+
+Alterações no arquivo `setup/urls.py`:
+```python
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('galeria.urls')),
+]
+```
+> Note que o import da view index foi removida deste arquivo, pois é o arquivo `galeria/urls.py` que vai indicar quais visões serão exibidas.
+>
+> Note também que não importamos um pacote na função `include`: apenas fornecemos uma string com o endereço do módulo urls do aplicativo (no exemplo, `galeria.urls`).
