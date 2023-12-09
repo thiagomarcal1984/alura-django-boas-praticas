@@ -161,3 +161,14 @@ A seguir temos alguns exemplos de ambientes virtuais e ferramentas relacionadas 
 - `Conda` (https://docs.conda.io/en/latest/): É uma alternativa não apenas às ferramentas de ambiente virtuais já citadas, mas ao instalador de pacotes pip também. Possui um escopo mais centrado na área de ciência de dados e possui a capacidade de instalar pacotes fora do ecossistema do Python.
 - `Virtualenvwrapper` (https://virtualenvwrapper.readthedocs.io/en/latest/): É uma extensão do projeto **Virtualenv** que torna a criação, deleção e gerenciamento geral dos ambientes virtuais mais fácil. Uma grande vantagem de sua utilização é a organização de todos os ambientes virtuais utilizados em um só lugar, além de facilitar os comandos de CLI.
 - `Poetry` (https://python-poetry.org/): É uma ferramenta para gerenciamento de dependências e pacotes do Python. Através do Poetry é possível declarar quais pacotes um projeto necessita para funcionar, de forma parecida ao `requirements.txt`, porém, de forma determinística.
+
+# Para saber mais: princípios do Django
+- produtividade;
+- documentação;
+- código limpo.
+
+A questão dos frameworks web do século XXI é tornar o desenvolvimento web mais rápido. E é isso que o Django deve permitir, um desenvolvimento muito veloz.
+
+Aplicações Django devem usar o mínimo possível de código, sem haver código padrão. Django deve aproveitar as características dinâmicas do Python, como introspecção (https://pt.wikipedia.org/wiki/Introspec%C3%A7%C3%A3o_%28computa%C3%A7%C3%A3o%29).
+
+Caso queira saber mais sobre a Filosofia do Django segundo a documentação oficial: https://docs.djangoproject.com/pt-br/4.1/misc/design-philosophies/
