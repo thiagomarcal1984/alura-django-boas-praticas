@@ -310,3 +310,15 @@ from django.shortcuts import render
 def index(request):
     return render(request, 'index.html')
 ```
+
+# Carregando o template
+Nesta aula, vamos apenas criar um diretório para os templates do aplicativo da galeria.
+
+Mudança no arquivo `galeria/views.py`:
+```python
+from django.shortcuts import render
+
+def index(request):
+    # return render(request, 'index.html')
+    return render(request, 'galeria/index.html')
+```
