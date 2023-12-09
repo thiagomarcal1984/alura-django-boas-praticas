@@ -69,3 +69,79 @@ Installing collected packages: tzdata, sqlparse, asgiref, django
 Successfully installed asgiref-3.7.2 django-4.1 sqlparse-0.4.4 tzdata-2023.3
 (venv) PS D:\alura\django-boas-praticas> 
 ```
+
+# Servidor
+Como ver as dependências instaladas no ambiente virtual com `pip freeze`:
+```
+(venv) PS D:\alura\django-boas-praticas> pip freeze
+asgiref==3.7.2
+Django==4.1
+sqlparse==0.4.4
+tzdata==2023.3
+(venv) PS D:\alura\django-boas-praticas> 
+```
+
+> A boa prática é jogar o conteúdo do `pip freeze` para um arquivo chamado `requirements.txt` (comando: `pip freeze > requirements.txt`).
+> Depois, para instalar as dependências, use o comando `pip install -r requirements.txt`.
+
+## Comandos do Django
+O Django possui o comando `django-admin help` para mostrar os comandos disponiveis na CLI:
+```
+(venv) PS D:\alura\django-boas-praticas> django-admin help
+
+Type 'django-admin help <subcommand>' for help on a specific subcommand.
+
+Available subcommands:
+
+[django]
+    check
+    compilemessages
+    createcachetable
+    dbshell
+    diffsettings
+    dumpdata
+    flush
+    inspectdb
+    loaddata
+    makemessages
+    makemigrations
+    migrate
+    optimizemigration
+    runserver
+    sendtestemail
+    shell
+    showmigrations
+    sqlflush
+    sqlmigrate
+    sqlsequencereset
+    squashmigrations
+    startapp
+    startproject
+    test
+    testserver
+Note that only Django core commands are listed as settings are not properly 
+configured (error: Requested setting INSTALLED_APPS, but settings are not 
+configured. You must either define the environment variable 
+DJANGO_SETTINGS_MODULE or call settings.configure() before accessing settings.).
+(venv) PS D:\alura\django-boas-praticas> 
+```
+Para criar um projeto Django chamado `setup`, use o comando `django-admin startproject setup .`. Repare que há um ponto depois do nome do projeto. Isso é bom para que a estrutura do projeto fique mais simples (pasta do projeto `setup` e o arquivo `manage.py`). Assim não é criada uma pasta pai chamada `setup` que contenha as duas macro-estruturas geradas (a pasta do aplicativo `setup` e o arquivo `manage.py`).
+
+> Uma boa prática para criar projetos Django é batizá-los com o nome de `config` ou `setup`, porque nesse projeto se concentram as configurações da aplicação Django como um todo.
+
+Agora já temos uma estrutura pronta para rodar a aplicação. Para isso, execute o comando `python manage.py runserver`: 
+```
+(venv) PS D:\alura\django-boas-praticas> python .\manage.py runserver
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+
+You have 18 unapplied migration(s). Your project may not work properly 
+until you apply the migrations for app(s): admin, auth, contenttypes, sessions.
+Run 'python manage.py migrate' to apply them.
+December 09, 2023 - 12:33:31
+Django version 4.1, using settings 'setup.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CTRL-BREAK.
+```
