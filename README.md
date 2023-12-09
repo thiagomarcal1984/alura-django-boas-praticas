@@ -279,3 +279,34 @@ urlpatterns = [
 > Note que o import da view index foi removida deste arquivo, pois é o arquivo `galeria/urls.py` que vai indicar quais visões serão exibidas.
 >
 > Note também que não importamos um pacote na função `include`: apenas fornecemos uma string com o endereço do módulo urls do aplicativo (no exemplo, `galeria.urls`).
+
+# Templates
+Para dinamizar a geração das páginas, podemos usar os templates.
+
+Para usá-los, precisamos configurar o diretório onde eles ficarão armazenados para renderização posterior.
+
+Alterações no arquivo `setup/settings.py`:
+```python
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        # O parâmetro 'DIRS' contém uma lista dos diretórios onde
+        # estarão os templates que serão renderizados pelo projeto.
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'APP_DIRS': True,
+        'OPTIONS': {
+          # Resto do código
+        }
+    }
+]
+```
+
+Os templates são chamados da view por meio da função `render`.
+
+Mudanças no arquivo `galeria.views.py`:
+```python
+from django.shortcuts import render
+
+def index(request):
+    return render(request, 'index.html')
+```

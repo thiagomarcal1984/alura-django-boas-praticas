@@ -59,8 +59,10 @@ ROOT_URLCONF = 'setup.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
+        # O parâmetro 'DIRS' contém uma lista dos diretórios onde
+        # estarão os templates que serão renderizados pelo projeto.
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
