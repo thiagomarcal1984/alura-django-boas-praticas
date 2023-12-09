@@ -208,3 +208,16 @@ SECRET_KEY = str(os.getenv('SECRET_KEY'))
 
 # Git e GitHub
 Se você visitar o endereço http://gitignore.io, você pode usar o gerador de `.gitignore` deles. Basta escolher as linguagens que serão usadas no seu código e copiar o `.gitignore` criado.
+
+# App e projeto
+App é uma aplicação que roda sobre o projeto (no nosso caso, é o diretório `setup`).
+
+Vamos criar um app de galeria com o comando `python .\manage.py startapp galeria`.
+
+Os seguintes seis arquivos do diretório `galeria` (além do diretório migrations) serão criados:
+- `__init__.py`;
+- admin.py;
+- apps.py;
+- models.py;
+- tests.py;
+- views.py.
