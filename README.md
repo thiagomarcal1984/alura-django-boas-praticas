@@ -172,3 +172,12 @@ A questão dos frameworks web do século XXI é tornar o desenvolvimento web mai
 Aplicações Django devem usar o mínimo possível de código, sem haver código padrão. Django deve aproveitar as características dinâmicas do Python, como introspecção (https://pt.wikipedia.org/wiki/Introspec%C3%A7%C3%A3o_%28computa%C3%A7%C3%A3o%29).
 
 Caso queira saber mais sobre a Filosofia do Django segundo a documentação oficial: https://docs.djangoproject.com/pt-br/4.1/misc/design-philosophies/
+
+# Idioma e timezone
+A configuração do idioma e da timezone é feita no arquivo `settings.py`, localizada no diretório do projeto principal da aplicação:
+```
+LANGUAGE_CODE = 'pt-br'
+
+TIME_ZONE = 'America/Sao_Paulo'
+```
+> A biblioteca para implementação da timezone do Django mudou de `pytz` para `zoneinfo`.
