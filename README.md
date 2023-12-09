@@ -322,3 +322,44 @@ def index(request):
     # return render(request, 'index.html')
     return render(request, 'galeria/index.html')
 ```
+
+# Arquivos estáticos
+Primeiro: configurar 3 variáveis no arquivo `settings.py`:
+1. `STATIC_URL` já é escrita por padrão pelo `django-admin`. Seu valor é `static/`;
+2. `STATIC_ROOT` é o caminho do diretório onde estarão os arquivos obtidos do comando `python manage.py collectstatic`.
+3. `STATICFILES_DIR` é uma lista com todos os diretórios de onde estarão os arquivo que serão compilados para o caminho mencionado em `STATIC_ROOT`.
+
+Mudanças no arquivo `settings.py`:
+```python
+# Resto do código
+STATIC_URL = 'static/'
+STATICFILES_DIRS = [
+    # Arquivos-fonte  para compilação posterior para
+    # o diretório STATIC_ROOT.
+    os.path.join(BASE_DIR, 'setup/static'), 
+]
+
+# Caminho absoluto de onde buscamos os arquivo estáticos coletados.
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# Resto do código
+```
+
+Mas... apenas configurar os diretórios em settings.py não basta. É necessário carregar o aplicativo `static` no template. Os comando no template são sempre embedados com `{% %}`.
+
+Dentro da página `galeria/index.html` iremos carregar o aplicativo `static` e usar sua função para buscar os arquivos armazenados em `STATIC_ROOT`.
+
+Mudanças no arquivo `galeria/index.html`:
+```html
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <!-- Resto do código -->
+    <link rel="stylesheet" href="{% static '/styles/style.css' %}">
+</head>
+
+<body>
+  <!-- Resto do código -->
+```
+> Repare que no início carregamos o aplicativo `static` com o comando `{% load static %}`, e que para carregarmos a folha de estilos salva em `STATIC_ROOT` usamos o comando `{% static 'nome_do_arquivo_estatico' %}`.
