@@ -221,3 +221,33 @@ Os seguintes seis arquivos do diretório `galeria` (além do diretório migratio
 - models.py;
 - tests.py;
 - views.py.
+
+# Views e URLs
+No arquivo `views.py` definimos o que será exibido no navegador. Para isso, definimos funções de view nesse arquivo.
+
+Alterações no arquivo `galerias/views.py`:
+```python
+from django.shortcuts import render
+from django.http import HttpResponse
+
+def index(request):
+    return HttpResponse('''
+      <h1>Alura Space</h1><p>Bem vindo ao espaço!</p>
+    ''')
+```
+
+Uma vez que a view foi definida, é necessário roteá-la no arquivo `urls.py` do projeto principal
+
+Alterações no arquivo `setup/urls.py`:
+```python
+from django.contrib import admin
+from django.urls import path
+
+from galeria.views import index
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', index),
+]
+```
+> Repare na lista `urlpatterns`: originalmente só tinha uma rota/path para o painel administrativo. Agora, a raiz da aplicação (representada pela string vazia) redireciona para a view `index`, que está no pacote `galeria.views`.
