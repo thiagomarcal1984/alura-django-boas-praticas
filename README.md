@@ -505,3 +505,69 @@ Observações:
 1. O comando `{% extends 'galeria/base.html' %}` serve para dizer que o template atual precisa ser incorporado (estender) ao template base que está no arquivo `galeria/base.html`;
 2. Novamente, o comando `{% load static %}` não é obrigatório, exceto se você precisar carregar conteúdo estático (o que é o caso, por causa das imagens estáticas).
 3. Os comandos `{% block content %}` e `{% endblock %}` estabelecem onde o bloco chamado `content` começa e termina. Dentro desse bloco colocamos o conteúdo específico do template atual.
+
+# Partials
+Partials são conteúdos que podem ser reusados nos templates. Por convenção, os arquivos de partials são guardados no diretório `partials` e são prefixados com um underline.
+
+O menu lateral é um exemplo de partial que pode ser definido. Chamaremos o arquivo de `galeria/partials/_menu-lateral.html`:
+```html
+{% load static %}
+<section class="menu-lateral">
+    <nav class="menu-lateral__navegacao">
+        <a href="{% url 'index' %}"><img src="{% static '/assets/ícones/1x/Home - ativo.png' %}"> Home</a>
+        <a href="#"><img src="{% static '/assets/ícones/1x/Mais vistas - inativo.png' %}"> Mais vistas</a>
+        <a href="#"><img src="{% static '/assets/ícones/1x/Novas - inativo.png' %}"> Novas</a>
+        <a href="#"><img src="{% static '/assets/ícones/1x/Surpreenda-me - inativo.png' %}"> Surpreenda-me</a>
+    </nav>
+</section>
+```
+> Note mais uma vez que, como o menu usa arquivos estáticos, é necessário usar o aplicativo `static`, carregando-o com o comando `{% load static %}`.
+
+Para aplicar uma partial, usamos o comando `{% include 'dir/partial/_arquivo' %}`. Por exemplo, em `index.html`:
+```html
+{% extends 'galeria/base.html' %}
+{% load static %}
+{% block content %}
+  <div class="pagina-inicial">
+      <!-- Resto do código de galeria/index.html -->
+      <main class="principal">
+          {% include 'galeria/partials/_menu-lateral.html' %}
+      </main>
+  </div>
+{% endblock %}
+```
+
+Outro exemplo é com a partial para o rodapé, que chamaremos de `galeria/partials/_footer.html`:
+```html
+{% load static %}
+<footer class="rodape">
+    <div class="rodape__icones">
+        <a href="https://twitter.com/AluraOnline">
+            <img src="{% static '/assets/ícones/1x/twitter.png' %}">
+        </a>
+        <a href="https://www.instagram.com/aluraonline/">
+            <img src="{% static '/assets/ícones/1x/instagram.png' %}">
+        </a>
+    </div>
+    <p class="rodape__texto">Desenvolvido por Alura</p>
+</footer>
+```
+
+Vamos incluir a partial do footer em `galeria/base.html`:
+```html
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <!-- Resto do head -->
+</head>
+
+<body>
+    {% block content %}
+    {% endblock %}
+    {% include 'galeria/partials/_footer.html' %}
+</body>
+
+</html>
+```
