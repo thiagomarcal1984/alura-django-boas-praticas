@@ -460,3 +460,48 @@ Veja o exemplo no arquivo `templates/galeria/imagem.html`:
                     <!-- Resto do código -->
 ```
 > Se você tentar acessar o HTML do template diretamente ao invés de usar o comando `{% url 'rota' %}`, o Django não vai conseguir carregar a view corretamente.
+
+# Base e DRY
+O Django utiliza um conceito de extensão de templates a partir da definição de blocos de conteúdo.
+
+Para atender ao princípio do DRY (Don't Repeat Yourself), podemos criar um template-base e nele incluir os conteúdos que podem se repetir (por exemplo, o cabeçalho HTML das páginas).
+
+A estrutura de um template-base é semelhante ao seguinte código:
+```html
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <!-- Conteúdo do head -->
+</head>
+<body>
+  {% block content %}
+  {% endblock %}
+</body>
+</html>
+```
+Observações: 
+1. O comando `{% load static %}` não é obrigatório, mas como o cabeçalho costuma ter conteúdo estático (CSS, JavaScript etc.), precisamos carregá-lo usando a função `{% static 'arquivo' %}` do aplicativo `static`.
+2. O comando `{% block content %}` define um bloco cujo nome é `content`. Podemos criar vários blocos com diferentes nomes.
+3. Todo block precisa ser fechado com o comando `{% endblock %}`.
+
+E sempre que um template-base for reusado, usamos o comando de importação `{% extends 'nome_do_arquivo_de_template_base' %}`.
+
+Por exemplo, no arquivo `galeria/index.html`:
+```html
+{% extends 'galeria/base.html' %}
+{% load static %}
+{% block content %}
+  <header class="cabecalho">
+    <h1>Aqui fica o conteúdo de galeria/index.html</h1>
+
+    <img src="{% static '/assets/logo/Logo(2).png' %}" />
+  </header>
+  <!-- Resto do código -->
+{% endblock %}
+```
+Observações:
+1. O comando `{% extends 'galeria/base.html' %}` serve para dizer que o template atual precisa ser incorporado (estender) ao template base que está no arquivo `galeria/base.html`;
+2. Novamente, o comando `{% load static %}` não é obrigatório, exceto se você precisar carregar conteúdo estático (o que é o caso, por causa das imagens estáticas).
+3. Os comandos `{% block content %}` e `{% endblock %}` estabelecem onde o bloco chamado `content` começa e termina. Dentro desse bloco colocamos o conteúdo específico do template atual.
