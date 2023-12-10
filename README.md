@@ -419,3 +419,44 @@ urlpatterns = [
     path('imagem', imagem),
 ]
 ```
+# URL name
+Podemos nomear/rotular cada rota configurada no arquivo `urls.py`. Basta acrescentar para a função `path` de cada rota o parâmetro `name='nome_da_rota'`.
+
+Mudanças no arquivo `galeria/urls.py`:
+```python
+from django.urls import path
+
+from galeria.views import index, imagem
+
+urlpatterns = [
+    # A rota raiz foi batizada de "index".
+    path('', index, name='index'), 
+    # A rota /imagem foi batizada de "imagem".
+    path('imagem', imagem, name='imagem'), 
+]
+```
+
+Pra que nomeamos as rotas? Para referenciá-las por meio do comando `{% url 'nome_da_rota' %}`.
+
+Veja o exemplo no arquivo `templates/galeria/imagem.html`:
+```html
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <!-- Resto do código -->
+
+</head>
+
+<body>
+    <div class="pagina-inicial">
+        <!-- Resto do código -->
+        <main class="principal">
+            <section class="menu-lateral">
+                <nav class="menu-lateral__navegacao">
+                    <!-- Aqui inserimos um comando {% url 'nome_da_rota' %} -->
+                    <a href="{% url 'index' %}"><img src="{% static '/assets/ícones/1x/Home - ativo.png' %}"> Home</a>
+                    <!-- Resto do código -->
+```
+> Se você tentar acessar o HTML do template diretamente ao invés de usar o comando `{% url 'rota' %}`, o Django não vai conseguir carregar a view corretamente.
