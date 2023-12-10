@@ -368,3 +368,54 @@ Mudanças no arquivo `galeria/index.html`:
 Nesta aula apenas configuramos as tags de imagem para carregar os arquivos estáticos com o comando `{% static 'nome_do_arquivo_estático' %}`.
 
 Destaque para o uso da tecla `Alt` do Windows para posicionar vários cursores no VS Code.
+
+# Outras páginas
+Vamos criar um HTML chamado `imagem.html`. Nele vamos novamente carregar o aplicativo `static` e as imagens/folha de estilo serão carregadas usando o comando `{% static 'nome_do_arquivo_estatico' %}`:
+
+```html
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <!-- Resto do código -->
+    <link rel="stylesheet" href="{% static 'styles/style.css' %}">
+</head>
+
+<body>
+    <div class="pagina-inicial">
+        <header class="cabecalho">
+            <!-- Carregando o logotipo estático -->
+            <img src="{% static '/assets/logo/Logo(2).png' %}" alt="Logo da Alura Space" />
+            <div class="cabecalho__busca">
+                <div class="busca__fundo">
+                    <input class="busca__input" type="text" placeholder="O que você procura?">
+                    <!-- Carregando o ícone estático -->
+                    <img class="busca__icone" src="{% static '/assets/ícones/1x/search.png' %}" alt="ícone de search">
+                </div>
+            </div>
+        </header>
+        <!-- Resto do código -->
+```
+
+Depois de criada a página, criaremos um função de view para ela no arquivo `galeria/views.py`:
+```python
+from django.shortcuts import render
+
+# Resto do código
+
+def imagem(request):
+    return render(request, 'galeria/imagem.html')
+```
+
+Finalmente, vamos configurar as rotas do Django no arquivo `galerias/urls.py`:
+```python
+from django.urls import path
+
+from galeria.views import index, imagem
+
+urlpatterns = [
+    path('', index),
+    path('imagem', imagem),
+]
+```
